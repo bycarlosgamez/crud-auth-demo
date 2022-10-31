@@ -3,7 +3,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const exphbs = require("express-handlebars");
-const passport = requiere("passport");
+const passport = require("passport");
 const session = require("express-session");
 const connectDB = require("./config/db");
 
@@ -11,7 +11,7 @@ const connectDB = require("./config/db");
 dotenv.config({ path: "./config/config.env" });
 
 // Passport config
-dotenv.config("./config/passport")(passport);
+require("./config/passport")(passport);
 
 connectDB();
 
@@ -50,6 +50,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 app.use("/", require("./routes/index"));
+app.use("/auth", require("./routes/auth"));
 
 // PORT
 const PORT = process.env.PORT || 3510;
